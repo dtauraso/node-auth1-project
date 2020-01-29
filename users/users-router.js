@@ -1,8 +1,9 @@
 const router = require('express').Router();
 
 const Users = require('./users-model.js');
+const restrictedMiddleware = require('../api/restricted-middleware.js');
 
-router.get('/', (req, res) => {
+router.get('/', restrictedMiddleware, (req, res) => {
   Users.find()
     .then(users => {
       res.json(users);
